@@ -21,6 +21,19 @@ export class CounterComponent {
     console.log('ngOnChanges');
     console.log(changes);
     console.log('-'.repeat(10));
+    // Detectar si se cambio el input duration, el log mostrar el valor si se cambio y si no mostrará undefined
+    const duration = changes['duration'];
+    console.log('Duration es: ', duration);
+
+    // Entonces con esta información puedo ejecutar una funcion async/nosync cada vez que cambie el input duration
+    if (duration) {
+      this.doSomething();
+    }
+
+    // Validar si el valor de duration es distinto al valor anterior y hacer algo de acuerdo a eso, esto es util cuando el valor de un input especifico no cambia y queremos evitar llamar siempre la funcion cuando cambia el input
+    // if ( duration && duration.previousValue !== duration.currentValue ) {
+    //   this.doSomething();
+    // }
   }
 
   // Este evento se ejecuta una sola vez, despues de que se renderice el componente, acá recien se pueden hacer peticiones asíncronas, async, then, suscribe, etc
@@ -41,5 +54,9 @@ export class CounterComponent {
   ngOnDestroy() {
     console.log('ngOnDestroy');
     console.log('-'.repeat(10));
+  }
+
+  doSomething() {
+    console.log('change duration');
   }
 }
