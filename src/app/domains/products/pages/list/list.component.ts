@@ -7,4 +7,9 @@ import { ProductComponent } from '../../components/product/product.component';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
-export class ListComponent {}
+export class ListComponent {
+  // Evento recibido desde el hijo
+  fromChild(event: string) {
+    console.log('Mensaje recibido desde el hijo:', event);
+  }
+}
