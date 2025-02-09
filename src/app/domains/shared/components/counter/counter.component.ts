@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, signal, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -9,6 +9,10 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 export class CounterComponent {
   @Input({ required: true }) duration = 0;
   @Input({ required: true }) message = '';
+
+  counter = signal(0);
+  // Crear una referencia para poder destruir la ejecucion de una funcion al desmontar un componente, ya que al desmontar un componente no se destruyen las funciones que siguen ejecutandose
+  counterRef: number | undefined;
 
   // Esto se ejecuta una sola vez, antes de que se renderice el componente, no colocar nada async
   constructor() {
@@ -42,6 +46,12 @@ export class CounterComponent {
     console.log('duration =>', this.duration);
     console.log('message =>', this.message);
     console.log('-'.repeat(10));
+
+    this.counterRef = window.setInterval(() => {
+      console.log('run interval');
+
+      this.counter.update((statePrev) => statePrev + 1);
+    }, 1000);
   }
 
   // Este evento se ejecuta una sola vez inmeditamente despues de ngOnInit y sirve para detectar si se renderizaron los hijos del componente
@@ -54,6 +64,9 @@ export class CounterComponent {
   ngOnDestroy() {
     console.log('ngOnDestroy');
     console.log('-'.repeat(10));
+
+    // Cuando se destruya el componente, tambien se destruira la ejecucion de la funcion interval
+    window.clearInterval(this.counterRef);
   }
 
   doSomething() {
