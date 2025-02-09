@@ -1,16 +1,19 @@
-<div class="grid grid-cols-3 gap-8">
-  <!-- Forma de pasar cada uno de los atributos del objeto -->
-  <!-- <app-product
-    *ngFor="let product of products()"
-    [title]="product.title"
-    [price]="product.price"
-    [img]="product.image"
-    (addToCart)="fromChild($event)"
-  /> -->
-  <!-- Forma recomendada donde pasamos el objeto completo, de esta manera no estamos atados a los atributos y desde el objeto podemos agregar o quitar atributos son modificar el componente -->
-  <app-product
-    *ngFor="let product of products()"
-    [product]="product"
-    (addToCart)="fromChild($event)"
-  />
+<div class="container mx-auto">
+  <app-header />
+  <div class="grid grid-cols-4 gap-8 mt-5">
+    <!-- Forma de pasar cada uno de los atributos del objeto -->
+    <!-- <app-product
+      *ngFor="let product of products()"
+      [title]="product.title"
+      [price]="product.price"
+      [img]="product.image"
+      (addToCart)="fromChild($event)"
+    /> -->
+    <!-- Forma recomendada donde pasamos el objeto completo, de esta manera no estamos atados a los atributos y desde el objeto podemos agregar o quitar atributos son modificar el componente -->
+    <app-product
+      *ngFor="let product of products()"
+      [product]="product"
+      (addToCart)="fromChild($event)"
+    />
+  </div>
 </div>
