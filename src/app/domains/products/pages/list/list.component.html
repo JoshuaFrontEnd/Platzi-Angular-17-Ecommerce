@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-  <app-header />
+  <app-header [cart]="cart()" />
   <div class="grid grid-cols-4 gap-8 mt-5">
     <!-- Forma de pasar cada uno de los atributos del objeto -->
     <!-- <app-product
@@ -13,7 +13,7 @@
     <app-product
       *ngFor="let product of products()"
       [product]="product"
-      (addToCart)="fromChild($event)"
+      (addToCart)="addToCart($event)"
     />
   </div>
 </div>

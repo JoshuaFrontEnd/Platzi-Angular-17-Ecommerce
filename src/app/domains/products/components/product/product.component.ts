@@ -22,8 +22,6 @@ export class ProductComponent {
 
   addToCartHandler() {
     console.log('Click from child');
-    this.addToCart.emit(
-      'Este es un mensaje desde el hijo:' + this.product.title
-    );
+    this.addToCart.emit(this.product);
   }
 }
