@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { ProductComponent } from '../../components/product/product.component';
-import { Product } from '../../../shared/models/product.models';
 import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { Product } from '../../../shared/models/product.models';
 import { CartService } from '../../../shared/services/cart.service';
+import { ProductService } from '../../../shared/services/product.service';
+import { ProductComponent } from '../../components/product/product.component';
 
 @Component({
   selector: 'app-list',
@@ -16,53 +17,16 @@ export class ListComponent {
 
   // Inyectar el servicio desde el store
   private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  constructor() {
-    const initProducts: Product[] = [
-      {
-        id: Date.now(),
-        title: 'Product 1',
-        price: 100,
-        image: 'https://picsum.photos/600?r=21',
-        creationAt: new Date().toISOString(),
+  // Obtener los productos desde el servicio
+  ngOnInit() {
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products.set(products);
       },
-      {
-        id: Date.now(),
-        title: 'Product 2',
-        price: 200,
-        image: 'https://picsum.photos/600?r=22',
-        creationAt: new Date().toISOString(),
-      },
-      {
-        id: Date.now(),
-        title: 'Product 3',
-        price: 300,
-        image: 'https://picsum.photos/600?r=23',
-        creationAt: new Date().toISOString(),
-      },
-      {
-        id: Date.now(),
-        title: 'Product 4',
-        price: 400,
-        image: 'https://picsum.photos/600?r=24',
-        creationAt: new Date().toISOString(),
-      },
-      {
-        id: Date.now(),
-        title: 'Product 5',
-        price: 500,
-        image: 'https://picsum.photos/600?r=25',
-        creationAt: new Date().toISOString(),
-      },
-      {
-        id: Date.now(),
-        title: 'Product 6',
-        price: 600,
-        image: 'https://picsum.photos/600?r=26',
-        creationAt: new Date().toISOString(),
-      },
-    ];
-    this.products.set(initProducts);
+      error: (err) => console.error(err),
+    });
   }
 
   // Evento recibido desde el hijo
