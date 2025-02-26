@@ -16,18 +16,18 @@ export class CounterComponent {
 
   // Esto se ejecuta una sola vez, antes de que se renderice el componente, no colocar nada async
   constructor() {
-    console.log('constructor');
-    console.log('-'.repeat(10));
+    // console.log('constructor');
+    // console.log('-'.repeat(10));
   }
 
   // Este evento se ejecuta antes y durante el render del componente, cuando exista algun cambio y permite identificar que cambió
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges');
-    console.log(changes);
-    console.log('-'.repeat(10));
+    // console.log('ngOnChanges');
+    // console.log(changes);
+    // console.log('-'.repeat(10));
     // Detectar si se cambio el input duration, el log mostrar el valor si se cambio y si no mostrará undefined
     const duration = changes['duration'];
-    console.log('Duration es: ', duration);
+    // console.log('Duration es: ', duration);
 
     // Entonces con esta información puedo ejecutar una funcion async/nosync cada vez que cambie el input duration
     if (duration) {
