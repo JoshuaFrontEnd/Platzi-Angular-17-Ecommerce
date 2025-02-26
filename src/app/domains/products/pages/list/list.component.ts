@@ -8,7 +8,7 @@ import { ProductComponent } from '@products/components/product/product.component
 
 @Component({
   selector: 'app-list',
-  imports: [CommonModule, ProductComponent, HeaderComponent],
+  imports: [CommonModule, ProductComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
